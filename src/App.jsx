@@ -12,6 +12,7 @@ function App() {
   const handleUpload = () => {
     console.log(selectedFile);
     setVideoURL(URL.createObjectURL(selectedFile));
+    
   }
 
   return (
