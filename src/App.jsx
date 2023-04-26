@@ -7,13 +7,17 @@ function App() {
     setSelectedFile(event.target.files[0]);
   }
 
+  const handleUpload = () => {
+    console.log(selectedFile);
+  }
+
   return (
     <div>
       <input 
         type="file" 
         name="media" 
         onChange={changeHandler} />
-      <button>Generate Subtitles</button>
+      <button onClick={handleUpload}>Generate Subtitles</button>
     </div>
   )
 }
