@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import ReactPlayer from "react-player";
 
@@ -9,10 +10,12 @@ function App() {
     setSelectedFile(event.target.files[0]);
   }
 
-  const handleUpload = () => {
-    console.log(selectedFile);
+  const handleUpload = async () => {
     setVideoURL(URL.createObjectURL(selectedFile));
-    
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+    const response = await axios.post('http://localhost:5001/transcribe', formData)
+    console.log(response.data);
   }
 
   return (
