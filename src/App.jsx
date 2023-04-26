@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import ReactPlayer from "react-player";
+import Subtitles from './components/Subtitles'
 
 function App() {
   const [selectedFile, setSelectedFile] = useState();
   const [videoURL, setVideoURL] = useState();
+  const [subtitles, setSubtitles] = useState('');
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -15,7 +17,7 @@ function App() {
     const formData = new FormData();
     formData.append('file', selectedFile);
     const response = await axios.post('http://localhost:5001/transcribe', formData)
-    console.log(response.data);
+    setSubtitles(response.data.text);
   }
 
   return (
@@ -26,6 +28,7 @@ function App() {
         name="media" 
         onChange={changeHandler} />
       <button onClick={handleUpload}>Generate Subtitles</button>
+      <Subtitles subtitles={subtitles} />
     </div>
   )
 }

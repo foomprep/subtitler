@@ -1,0 +1,4 @@
+.word:hover {
+    cursor: pointer;
+    color: gray;
+}
