@@ -1,7 +1,9 @@
 function App() {
 
   return (
-    <>Hello world</>
+    <div>
+      <input type="file" name="media" />
+    </div>
   )
 }
 
