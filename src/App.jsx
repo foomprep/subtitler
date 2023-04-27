@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Subtitles from './components/Subtitles'
+import './App.css';
 
 function App() {
   const [selectedFile, setSelectedFile] = useState();
@@ -38,7 +39,7 @@ function App() {
   }, [subtitles])
 
   return (
-    <div>
+    <div className='container'>
       <video id='video' height="400" src={videoURL} controls />
       <input 
         type="file" 
