@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState } from "react";
-import ReactPlayer from "react-player";
 import Subtitles from './components/Subtitles'
 
 function App() {
@@ -22,7 +21,7 @@ function App() {
 
   return (
     <div>
-      <ReactPlayer url={videoURL} controls />
+      <video height="400" src={videoURL} controls />
       <input 
         type="file" 
         name="media" 
