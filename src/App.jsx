@@ -22,18 +22,19 @@ function App() {
   }
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const video = document.getElementById('video');
-      const currentTime = video.currentTime;
-      for (let i=0; i<subtitles.start.length; i++) {
-        if (currentTime > subtitles.start[i] && currentTime < subtitles.end[i]) {
-          setDisplayedSubtitle(subtitles.text[i]);
-          break;
+    if (subtitles.start) {
+      const interval = setInterval(() => {
+        const currentTime = document.getElementById('video').currentTime;
+        for (let i=0; i<subtitles.start.length; i++) {
+          if (currentTime > subtitles.start[i] && currentTime < subtitles.end[i]) {
+            setDisplayedSubtitle(subtitles.text[i]);
+            break;
+          }
         }
-      }
-    }, 100)
+      }, 100)
 
-    return () => clearInterval(interval);
+      return () => clearInterval(interval);
+    }
   }, [subtitles])
 
   return (
