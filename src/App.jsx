@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Subtitles from './components/Subtitles'
+import Loading from './components/Loading'
 import './App.css';
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
   const [videoURL, setVideoURL] = useState();
   const [displayedSubtitle, setDisplayedSubtitle] = useState('');
   const [subtitles, setSubtitles] = useState({});
+  const [isLoading, setLoading] = useState(false);
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -18,12 +20,14 @@ function App() {
     setVideoURL(URL.createObjectURL(selectedFile));
     const formData = new FormData();
     formData.append('file', selectedFile);
+    setLoading(true);
     const response = await axios.post('http://localhost:5001/transcribe', formData)
     setSubtitles(response.data);
+    setLoading(false);
   }
 
   useEffect(() => {
-    if (subtitles.start) {
+    if (subtitles.start && !isLoading) {
       const interval = setInterval(() => {
         const currentTime = document.getElementById('video').currentTime;
         for (let i=0; i<subtitles.start.length; i++) {
@@ -36,11 +40,11 @@ function App() {
 
       return () => clearInterval(interval);
     }
-  }, [subtitles])
+  }, [subtitles, isLoading])
 
   return (
     <div className='container'>
-      <video id='video' height="400" src={videoURL} controls />
+      {isLoading ? <Loading /> : <video id='video' height="400" src={videoURL} controls />}
       <input 
         type="file" 
         name="media" 
