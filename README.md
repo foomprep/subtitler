@@ -1,3 +1,5 @@
+# Subtitler (powered by OpenAI Whisper)
+
 This project loads audio/video into the browser, generates subtitles and lines up those subtitles with the loaded media.  
 
 It requires running a backend locally as well, which can be setup by visiting [Subtitler-Backend](https://github.com/jojeyh/subtitler-backend.git) and following the instructions.
