@@ -45,7 +45,7 @@ function App() {
 
   return (
     <div className='container'>
-      {isLoading ? <CircularProgress size='large' /> : <video id='video' height="400" src={videoURL} controls />}
+      {isLoading ? <CircularProgress size={40} /> : <video id='video' height="400" src={videoURL} controls />}
       <input 
         type="file" 
         name="media" 
