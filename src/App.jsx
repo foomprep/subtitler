@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Subtitles from './components/Subtitles'
 import Loading from './components/Loading'
 import './App.css';
+import { CircularProgress } from "@mui/material";
 
 function App() {
   const [selectedFile, setSelectedFile] = useState();
@@ -44,7 +45,7 @@ function App() {
 
   return (
     <div className='container'>
-      {isLoading ? <Loading /> : <video id='video' height="400" src={videoURL} controls />}
+      {isLoading ? <CircularProgress size='large' /> : <video id='video' height="400" src={videoURL} controls />}
       <input 
         type="file" 
         name="media" 
