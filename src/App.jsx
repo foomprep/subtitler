@@ -15,6 +15,13 @@ function App() {
     setSelectedFile(event.target.files[0]);
   }
 
+  const getSubtitleText = (subtitleData) => {
+    const textArray = subtitleData['text'];
+    let text = "";
+    textArray.forEach(segment => text += segment);
+    return text;
+  }
+
   const handleUpload = async () => {
     setDisplayedSubtitle('');
     setVideoURL(URL.createObjectURL(selectedFile));
@@ -22,8 +29,8 @@ function App() {
     formData.append('file', selectedFile);
     setLoading(true);
     const response = await axios.post('http://localhost:5001/transcribe', formData)
-    console.log(response.data);
-    setSubtitles(response.data);
+    const fullText = getSubtitleText(response.data);
+    setSubtitles(fullText);
     setLoading(false);
   }
 
